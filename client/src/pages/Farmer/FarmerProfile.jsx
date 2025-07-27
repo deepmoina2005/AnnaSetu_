@@ -123,7 +123,7 @@ const FarmerProfile = () => {
         formData.append("avatar", farmer.imageFile);
       }
 
-      const res = await fetch("http://localhost:4000/api/v1/profile/farmer-profile", {
+      const res = await fetch("https://anna-setu-5sz2.vercel.app/api/v1/profile/farmer-profile", {
         method: "POST",
         body: formData,
         credentials: "include",

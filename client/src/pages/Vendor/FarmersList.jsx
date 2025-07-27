@@ -9,7 +9,7 @@ const FarmersList = () => {
   useEffect(() => {
     const fetchFarmers = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/v1/profile/all-farmer", {
+        const res = await axios.get("https://anna-setu-5sz2.vercel.app/api/v1/profile/all-farmer", {
           withCredentials: true,
         });
         if (res.data.success) {

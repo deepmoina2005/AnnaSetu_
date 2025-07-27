@@ -1,17 +1,9 @@
-import Product from "../models/Product.js";  // Notice capital P and exact file name
+import Product from "../models/Product.js";  // <-- make sure the path & filename case matches exactly
 import uploadImage from "../utils/uploadImage.js";
 
 export const addProduct = async (req, res) => {
   try {
-    const {
-      name,
-      description,
-      category,
-      price,
-      offerPrice,
-      quantity,
-      inStock
-    } = req.body;
+    const { name, description, category, price, offerPrice, quantity, inStock } = req.body;
 
     if (!name || !category || !price || !quantity) {
       return res.status(400).json({ message: "Required fields are missing" });

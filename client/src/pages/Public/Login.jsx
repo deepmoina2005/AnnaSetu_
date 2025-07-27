@@ -25,7 +25,7 @@ const Login = () => {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/user/login",
+        "https://anna-setu-5sz2.vercel.app/api/v1/user/login",
         {
           email: email.trim(),
           password: password.trim(),
