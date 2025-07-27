@@ -1,4 +1,4 @@
-import productSchema from "../models/Product.js";
+import Product from "../models/Product.js";  // Notice capital P and exact file name
 import uploadImage from "../utils/uploadImage.js";
 
 export const addProduct = async (req, res) => {
@@ -22,7 +22,7 @@ export const addProduct = async (req, res) => {
       imageUrl = await uploadImage(req.files.image);
     }
 
-    const newProduct = new productSchema({
+    const newProduct = new Product({
       name,
       description,
       category,
@@ -42,10 +42,9 @@ export const addProduct = async (req, res) => {
   }
 };
 
-// GET /api/v1/product/all
 export const getAllProducts = async (req, res) => {
   try {
-    const products = await productSchema.find().sort({ createdAt: -1 });
+    const products = await Product.find().sort({ createdAt: -1 });
     res.status(200).json({ products });
   } catch (error) {
     console.error("Get Products Error:", error);
@@ -53,12 +52,11 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
-// DELETE /api/v1/product/delete/:id
 export const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const deleted = await productSchema.findByIdAndDelete(id);
+    const deleted = await Product.findByIdAndDelete(id);
     if (!deleted) {
       return res.status(404).json({ message: "Product not found" });
     }
@@ -70,11 +68,10 @@ export const deleteProduct = async (req, res) => {
   }
 };
 
-// ✅ Corrected: Get Product by ID - /api/v1/product/:id
 export const productById = async (req, res) => {
   try {
-    const { id } = req.params; // ✅ Use req.params instead of req.body
-    const product = await productSchema.findById(id);
+    const { id } = req.params;
+    const product = await Product.findById(id);
 
     if (!product) {
       return res.status(404).json({ success: false, message: "Product not found" });
@@ -82,6 +79,7 @@ export const productById = async (req, res) => {
 
     res.status(200).json({ success: true, product });
   } catch (error) {
+    console.error("Get Product By ID Error:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
