@@ -25,7 +25,7 @@ const Login = () => {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        "https://anna-setu-5sz2.vercel.app/api/v1/user/login",
+        "https://anna-setu-1fal.vercel.app/api/v1/user/login",
         {
           email: email.trim(),
           password: password.trim(),
@@ -63,7 +63,6 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-indigo-600 px-4">
       <div className="bg-white w-full max-w-md p-8 rounded-xl shadow-lg space-y-6">
         <div className="text-center">
-          <img src="/profile_icon.png" alt="profile" className="w-16 h-16 mx-auto mb-2" />
           <h3 className="text-2xl font-semibold text-gray-800">Login Account</h3>
         </div>
 

@@ -25,7 +25,7 @@ const FarmerProducts = () => {
   // ✅ Fetch products from API
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get("https://anna-setu-5sz2.vercel.app/api/v1/product/all", {
+      const { data } = await axios.get("http://localhost:4000/api/v1/product/all", {
         withCredentials: true,
       });
       setProducts(data.products || []);
@@ -44,7 +44,7 @@ const FarmerProducts = () => {
     if (!confirmDelete) return;
 
     try {
-      const { data } = await axios.delete(`https://anna-setu-5sz2.vercel.app/api/v1/product/delete/${product._id}`, {
+      const { data } = await axios.delete(`http://localhost:4000/api/v1/product/delete/${product._id}`, {
         withCredentials: true,
       });
       toast.success(data.message);

@@ -10,7 +10,7 @@ const AllProducts = () => {
 
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get("https://anna-setu-5sz2.vercel.app/api/v1/product/all", {
+      const { data } = await axios.get("https://anna-setu-1fal.vercel.app/api/v1/product/all", {
         withCredentials: true,
       });
       setProducts(data.products || []);

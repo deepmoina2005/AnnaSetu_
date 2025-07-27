@@ -12,7 +12,7 @@ const ProductDetail = () => {
 
   const fetchProduct = async () => {
     try {
-      const { data } = await axios.get(`https://anna-setu-5sz2.vercel.app/api/v1/product/${id}`);
+      const { data } = await axios.get(`https://anna-setu-1fal.vercel.app/api/v1/product/${id}`);
       if (data.success) {
         setProduct(data.product);
       } else {

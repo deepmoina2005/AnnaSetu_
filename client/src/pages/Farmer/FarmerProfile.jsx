@@ -33,7 +33,7 @@ const FarmerProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/v1/user/getuser", {
+        const response = await axios.get("https://anna-setu-1fal.vercel.app/api/v1/user/getuser", {
           withCredentials: true,
         });
         setUser(response.data.user);
@@ -50,7 +50,7 @@ const FarmerProfile = () => {
       if (!user?.email) return;
       try {
         const res = await axios.get(
-          `http://localhost:4000/api/v1/profile/get-profile?email=${user.email}`,
+          `https://anna-setu-1fal.vercel.app/api/v1/profile/get-profile?email=${user.email}`,
           { withCredentials: true }
         );
         if (res.data.farmer) {
@@ -123,7 +123,7 @@ const FarmerProfile = () => {
         formData.append("avatar", farmer.imageFile);
       }
 
-      const res = await fetch("https://anna-setu-5sz2.vercel.app/api/v1/profile/farmer-profile", {
+      const res = await fetch("https://anna-setu-1fal.vercel.app/api/v1/profile/farmer-profile", {
         method: "POST",
         body: formData,
         credentials: "include",

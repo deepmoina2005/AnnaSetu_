@@ -12,7 +12,7 @@ const FarmerLayout = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get("https://anna-setu-5sz2.vercel.app/api/v1/user/logout", {
+      const response = await axios.get("https://anna-setu-1fal.vercel.app/api/v1/user/logout", {
         withCredentials: true,
       });
       toast.success(response.data.message);
