@@ -1,6 +1,7 @@
-import Product from "../models/Product.js"; // make sure path & case match exactly
+import Product from "../models/Product.js"; // Ensure case-sensitive correct path
 import uploadImage from "../utils/uploadImage.js";
 
+// Add Product
 export const addProduct = async (req, res) => {
   try {
     const { name, description, category, price, offerPrice, quantity } = req.body;
@@ -10,7 +11,6 @@ export const addProduct = async (req, res) => {
     }
 
     let imageUrl = "";
-
     if (req.files && req.files.image) {
       imageUrl = await uploadImage(req.files.image);
     }
@@ -31,7 +31,7 @@ export const addProduct = async (req, res) => {
   }
 };
 
-
+// Get All Products
 export const getAllProducts = async (req, res) => {
   try {
     const products = await Product.find().sort({ createdAt: -1 });
@@ -42,22 +42,7 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
-export const deleteProduct = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const deleted = await Product.findByIdAndDelete(id);
-    if (!deleted) {
-      return res.status(404).json({ message: "Product not found" });
-    }
-
-    res.status(200).json({ success: true, message: "Product deleted successfully" });
-  } catch (error) {
-    console.error("Delete Product Error:", error);
-    res.status(500).json({ message: "Server error while deleting product" });
-  }
-};
-
+// Get Product by ID
 export const productById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -71,5 +56,21 @@ export const productById = async (req, res) => {
   } catch (error) {
     console.error("Get Product By ID Error:", error);
     res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Delete Product (Assuming this function is being worked on)
+export const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findByIdAndDelete(id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error while deleting product" });
   }
 };
