@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../../main";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom"; // ✅ useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import { UserRound, Pencil, Mail, Phone, Lock } from "lucide-react";
 
 const Register = () => {
@@ -13,13 +13,20 @@ const Register = () => {
   const [role, setRole] = useState("");
 
   const { setIsAuthorized } = useContext(Context);
-  const navigate = useNavigate(); // ✅ initialize navigate
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    // Basic validation
     if (!name || !email || !password || !role || !phone) {
       toast.error("Please fill in all fields");
+      return;
+    }
+
+    // Optional: Phone number format validation
+    if (!/^\d{10}$/.test(phone)) {
+      toast.error("Enter a valid 10-digit phone number");
       return;
     }
 
@@ -38,16 +45,16 @@ const Register = () => {
       toast.success(data.message || "Registered Successfully");
       setIsAuthorized(true);
 
-      // ✅ Redirect based on role
+      // Redirect by role
       if (role === "Farmer") {
         navigate("/farmer");
       } else if (role === "Vendor") {
         navigate("/vendor");
       } else {
-        navigate("/"); // fallback
+        navigate("/");
       }
 
-      // Clear form (optional)
+      // Clear form
       setName("");
       setEmail("");
       setPhone("");
@@ -169,7 +176,7 @@ const Register = () => {
             Register
           </button>
 
-          {/* Redirect */}
+          {/* Redirect to Login */}
           <p className="text-sm text-center text-gray-600">
             Already have an account?{" "}
             <Link to="/login" className="text-indigo-500 hover:underline">

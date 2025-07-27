@@ -28,7 +28,7 @@ dbConnection();
 // ✅ Enable CORS for frontend
 app.use(
   cors({
-    origin: process.env.FRONTEND_URI || "http://localhost:3000",
+    origin: process.env.FRONTEND_URI || "https://anna-setu-lk1e.vercel.app/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
