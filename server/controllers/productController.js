@@ -1,16 +1,12 @@
-import Product from "../models/Product.js";  // <-- make sure the path & filename case matches exactly
+import Product from "../models/Product.js";
 import uploadImage from "../utils/uploadImage.js";
 
 export const addProduct = async (req, res) => {
   try {
-    const { name, description, category, price, offerPrice, quantity, inStock } = req.body;
-
-    if (!name || !category || !price || !quantity) {
-      return res.status(400).json({ message: "Required fields are missing" });
-    }
+    const { name, description, category, price, offerPrice, quantity } = req.body;
 
     let imageUrl = "";
-    if (req.files && req.files.image) {
+    if (req.files?.image) {
       imageUrl = await uploadImage(req.files.image);
     }
 
@@ -21,16 +17,15 @@ export const addProduct = async (req, res) => {
       price,
       offerPrice,
       quantity,
-      inStock: inStock === "true" || inStock === true,
-      image: imageUrl
+      image: imageUrl,
     });
 
     await newProduct.save();
 
-    res.status(201).json({ message: "Product added successfully", product: newProduct });
+    res.status(201).json({ success: true, product: newProduct });
   } catch (error) {
     console.error("Add Product Error:", error);
-    res.status(500).json({ message: "Server error while adding product" });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -53,7 +48,7 @@ export const deleteProduct = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    res.status(200).json({ message: "Product deleted successfully", product: deleted });
+    res.status(200).json({ success: true, message: "Product deleted successfully" });
   } catch (error) {
     console.error("Delete Product Error:", error);
     res.status(500).json({ message: "Server error while deleting product" });
