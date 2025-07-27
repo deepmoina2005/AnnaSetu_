@@ -1,4 +1,4 @@
-import productSchema from "../models/productSchema.js";
+import productSchema from "../models/Product.js";
 import uploadImage from "../utils/uploadImage.js";
 
 export const addProduct = async (req, res) => {
