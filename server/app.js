@@ -13,19 +13,19 @@ import { dbConnection } from "./database/dbConnection.js";
 import { errorMiddleware } from "./middlewares/error.js";
 import connectCloudinary from "./config/cloudinary.js";
 
-// ✅ Load environment variables early
+// ✅ Load environment variables
 dotenv.config({ path: "./config/config.env" });
 
-// ✅ Initialize express app
+// ✅ Initialize Express app
 const app = express();
 
-// ✅ Connect to Cloudinary
+// ✅ Connect Cloudinary
 await connectCloudinary();
 
-// ✅ Connect to MongoDB
+// ✅ Connect MongoDB
 dbConnection();
 
-// ✅ Enable CORS for frontend access
+// ✅ Enable CORS for frontend
 app.use(
   cors({
     origin: process.env.FRONTEND_URI || "http://localhost:3000",
@@ -34,13 +34,12 @@ app.use(
   })
 );
 
-
-// ✅ Core Middlewares
+// ✅ Core middlewares
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Handle File Uploads (for Cloudinary/local)
+// ✅ Handle file uploads
 app.use(
   fileUpload({
     useTempFiles: true,
@@ -48,17 +47,18 @@ app.use(
   })
 );
 
-// ✅ Optional: Serve uploaded static files (local fallback)
+// ✅ Static files (optional local fallback)
 app.use("/uploads", express.static("uploads"));
 
-// ✅ API Routes
+// ✅ Routes
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/product", productRouter);
 app.use("/api/v1/profile", farmerRouter);
 
-app.get('/', (req, res)=> res.send('Server is Live'))
+// ✅ Root Route
+app.get("/", (req, res) => res.send("Server is Live"));
 
-// ✅ Global Error Handler (should come last)
+// ✅ Error Middleware (should be last)
 app.use(errorMiddleware);
 
 export default app;
