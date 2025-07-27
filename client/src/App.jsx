@@ -75,7 +75,8 @@ export default function App() {
           <Route index element={<VendorHome />} />
           <Route path="products" element={<AllProducts />} />
           <Route path="farmers" element={<FarmersList />} />
-          <Route path="product/:id" element={<ProductDetail />} />
+          <Route path="product/:id" element={<ProductDetail />} />{" "}
+          {/* ✅ FIXED (no leading /) */}
           <Route path="cart" element={<Cart />} />
           <Route path="orders" element={<VendorOrders />} />
           <Route path="subscription" element={<Subscribe />} />

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
-import { LogOut, User } from "lucide-react";
+import { Bus, LogOut, User } from "lucide-react";
 import React, { useState } from "react";
 import { Context } from "../../main";
 import { useContext } from "react";
@@ -158,6 +158,12 @@ const VendorLayout = () => {
 
         {/* Right section - Profile & Logout */}
         <div className="hidden md:flex items-center gap-4">
+
+          <div className="relative cursor-pointer">
+<Bus/>          <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">
+           5
+          </button>
+        </div>
           <div className="relative group">
             <button className="bg-white text-gray-700 text-sm p-2 rounded-full hover:opacity-90">
               <User />
